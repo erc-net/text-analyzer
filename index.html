@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Analyzer</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: dodgerblue;
+      margin: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      font-size: larger;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    button {
+        margin: 0 auto;
+      margin-top: 10px;
+      font-size: larger;
+        padding: 15px;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        cursor: pointer;
+    }
+
+    .results {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1 
+  style="text-align: center;
+    color: white;
+    border: 2px solid #fff;
+  ">Text Analyzer</h1>
+
+  <textarea id="user-text" placeholder="Enter or paste your text here"></textarea>
+  <div class="container">
+      <button type="button" onclick="analyzeText()">Analyze</button>
+
+  </div>
+
+  <div class="results">
+    <p>Word count: <span id="numberOfWords"></span></p>
+    <p>Unique word count: <span id="uniqueWordCount"></span></p>
+    <p>Average word length: <span id="averageWordLength"></span></p>
+    <p>Average sentence length: <span id="averageSentenceLength"></span></p>
+  </div>
+
+  <script>
+    function analyzeText() {
+      // Get the user's text
+      const userText = document.getElementById('user-text').value;
+
+      // Split the text into words
+      const words = userText.split(' ');
+
+      // Count the total number of words
+      const wordCount = words.length;
+
+      // Count the number of unique words
+      const uniqueWordCount = new Set(words).size;
+
+      // Calculate the average word length
+      const averageWordLength = words.reduce((totalLength, word) => totalLength + word.length, 0) / wordCount;
+
+      // Calculate the average sentence length
+      const sentences = userText.split('.');
+      const averageSentenceLength = sentences.reduce((totalLength, sentence) => totalLength + sentence.length, 0) / sentences.length;
+
+      // Display the results
+      document.getElementById('numberOfWords').textContent = wordCount;
+      document.getElementById('uniqueWordCount').textContent = uniqueWordCount;
+      document.getElementById('averageWordLength').textContent = averageWordLength;
+      document.getElementById('averageSentenceLength').textContent = averageSentenceLength;
+    }
+  </script>
+</body>
+</html>
